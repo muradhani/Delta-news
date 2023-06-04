@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.deltanews.databinding.ActivityMainBinding
+import com.example.deltanews.newsfeed.NewsFeedRecyclerViewAdapter
 import com.example.deltanews.newsfeed.NewsFeedViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         val viewModel : NewsFeedViewModel = ViewModelProvider(this)[NewsFeedViewModel::class.java]
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
+        val newsFeedAdapter = NewsFeedRecyclerViewAdapter()
+        binding.recycleView.adapter=newsFeedAdapter
         viewModel.fetchNewFeed()
+
+        viewModel.newsfeedliveData.observe(this){newsFeedItems->
+            newsFeedAdapter.setItems(newsFeedItems)
+        }
     }
 }

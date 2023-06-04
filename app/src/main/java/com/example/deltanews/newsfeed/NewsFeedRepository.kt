@@ -1,5 +1,6 @@
 package com.example.deltanews.newsfeed
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.deltanews.NewsFeedItem
 import com.google.firebase.database.DataSnapshot
@@ -19,7 +20,7 @@ class NewsFeedRepository {
                     dataSnapshot.getValue(NewsFeedItem::class.java)!!
                 }
                 liveData.postValue(newsFeedItems)
-                //Log.i("ITEMS",newsFeedItems.toString())
+                Log.i("ITEMS",newsFeedItems.toString())
 
             }
 
